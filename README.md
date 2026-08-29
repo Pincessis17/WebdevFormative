@@ -1,3 +1,4 @@
+
 > _This folder holds Princess's part of the project (Frontend → Hero Pages)._
 > Owned/authored here: `css/style.css`, `includes/header.php`, `includes/footer.php`,
 > `js/validation.js`, `index.php`, `hero.php`.
@@ -99,3 +100,4 @@ xmen-crud/
   `requireLogin()`, which redirects to `login.php` if there is no
   active session — so these pages are protected even if someone
   navigates to the URL directly.
+
