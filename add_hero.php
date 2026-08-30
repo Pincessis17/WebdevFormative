@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     //if any is empty, assign error message to $error
     if ($values['hero_name'] === '' ||  $values['real_name'] === '' ||$values['short_bio'] === '' ||$values['long_bio'] === '' ) {
-        $error = 'Hero Name, Real Name, Short Biography and Long Biography are all required. Please fill all of them.'
+        $error = 'Hero Name, Real Name, Short Biography and Long Biography are all required. Please fill all of them.';
     } else {
         //prepare data for processing
         $stmt = $pdo -> prepare("
@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt -> execute($values);
 
         //redirects header to index.php, the main page
-        header('Location: index.php');
+        header('Location: index.php?added=1');
         exit; //exits cleanly
 
     }
@@ -53,18 +53,17 @@ require_once 'includes/header.php'; //redirects user to header (which should be 
 
 ?>
 
-<!doctype html>
 <div class = "form-page"> 
     <h1> Add a New Hero</h1>
 
 
     //error message if there is an error
-    <? if ($error):
-        <div className = "alert alert-error"> echo htmlspecialchars($error); <div>
+    <?php if ($error):
+        <div class = "alert alert-error"> echo htmlspecialchars($error); </div>
 
     endif; ?>
 
-    <form method = "POST" action="add_hero.php" class="add-form" id = "hero-form" novalidate>
+    <form method = "POST" action="add_hero.php" class="app-form" id = "hero-form" novalidate>
 
         <label for = "hero_name"> Hero Name *</label>
         <input type="text" id="hero_name" name="hero_name" required value="<?php echo htmlspecialchars($values['hero_name']); ?>">
@@ -88,19 +87,20 @@ require_once 'includes/header.php'; //redirects user to header (which should be 
         <input type="text" id="team" name="team" value="<?php echo htmlspecialchars($values['team']); ?>">
 
 
-        <label for = "publisher"> Publisher *</label>
+        <label for = "publisher"> Publisher </label>
         <input type="text" id="publisher" name="publisher" value="<?php echo htmlspecialchars($values['publisher']); ?>">
 
 
         <label for = "gender"> Gender *</label>
-        <input type="text" id="gender" name="gendegenderr" value="<?php echo htmlspecialchars($values['gender']); ?>">
+        <input type="text" id="gender" name="gender" value="<?php echo htmlspecialchars($values['gender']); ?>">
 
 
         <label for = "status"> Status *</label>
-        <?php foreach (['Active', 'Inactive', 'Deceased', 'Unknown'] as $opt): ?>
-                <option value="<?php echo $opt; ?>" <?php echo $values['status'] === $opt ? 'selected' : ''; ?>><?php echo $opt; ?></option>
-        <?php endforeach; ?>
-
+        <select id = 'status' name = "status">
+            <?php foreach (['Active', 'Inactive', 'Deceased', 'Unknown'] as $opt): ?>
+                    <option value="<?php echo $opt; ?>" <?php echo $values['status'] === $opt ? 'selected' : ''; ?>><?php echo $opt; ?></option>
+            <?php endforeach; ?>
+        </select>
 
         <label for="image_url">Image URL</label>
         <input type="url" id="image_url" name="image_url" placeholder="https://..." value="<?php echo htmlspecialchars($values['image_url']); ?>">
@@ -115,3 +115,6 @@ require_once 'includes/header.php'; //redirects user to header (which should be 
     </form>
 
 </div>
+
+<script src="js/validation.js"></script>
+<?php require_once 'includes/footer.php'; ?>
