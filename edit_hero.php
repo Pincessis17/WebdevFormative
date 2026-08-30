@@ -63,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         ]);
 
         //redirects header to index.php, the main page
-        header('Location: index.php?update=1');
+        header('Location: index.php?updated=1');
         exit; //exits cleanly
 
     }
@@ -84,7 +84,9 @@ require_once 'includes/header.php'; //redirects user to header (which should be 
         <div class = "alert alert-error"> <?php echo htmlspecialchars($error); ?> </div>
     <?php endif; ?>
 
-    <form method = "POST" action="edit_hero.php" class="add-form" id = "hero-form" novalidate>
+    <form method = "POST" action="edit_hero.php" class="app-form" id = "hero-form" novalidate>
+        <input type="hidden" name="id" value="<?php echo $id; ?>">
+
 
         <label for = "hero_name"> Hero Name *</label>
         <input type="text" id="hero_name" name="hero_name" required value="<?php echo htmlspecialchars($values['hero_name']); ?>">
