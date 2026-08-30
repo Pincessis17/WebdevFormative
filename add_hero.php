@@ -12,10 +12,23 @@ $values = [
     'long_bio' => '',
     'powers' => '',
     'team' => '',
-    'publishers' => 'Marvel Comics'
-    'gender' => 'Active',
-    'image_url' => '';
+    'publishers' => 'Marvel Comics',
+    'gender' => '',
+    'status' => 'Active',
+    'image_url' => '',
 ];
+
+//Post method
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+    //Trimming values to remove whitespace
+    foreach ($values as $key => $default) {
+        $values[$key] = trim($_POST[$key] ?? $default);
+    }
+
+    
+
+}
 
 
 
