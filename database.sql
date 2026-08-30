@@ -16,7 +16,7 @@ Create table users (
 
 -- Our default admin user for the system: username: professorx, password: xavier123
 insert into users (username, password) values 
-('professorx', '2b$10$Kn9JZAy3tW0QTum9Y7zHPuuh5hFV.PZfBofYF4BuCrto99vewA5dy');
+('professorx', '$2y$10$5bpHmu0xfbHCz3M1kZd.teWtnMuzN.jy4x20oAFCui5aTek2wOlXa');
 
 -- Table: heroes --
 -- This table stores the records of the X-Men heroes managed by Professor Xavier.
