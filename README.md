@@ -1,16 +1,4 @@
-
-> _This folder holds Princess's part of the project (Frontend → Hero Pages)._
-> Owned/authored here: `css/style.css`, `includes/header.php`, `includes/footer.php`,
-> `js/validation.js`, `index.php`, `hero.php`.
-> `config/db.php` and `includes/auth.php` are present only as **required dependencies**
-> (Sadia's work) so `index.php`/`hero.php` can actually run — not authored in this folder.
-> Sadia's and Tooshar's other files (login/register/logout, add/edit/delete hero,
-> database.sql) were moved to `_not-my-scope/` for local reference only — delete that
-> folder before the final merge, it should not be part of this repo's history.
-
----
-
-# Xavier's Roster — X-Men Hero CRUD App
+# Xavier's Roster - X-Men Hero CRUD App
 
 A PHP + MySQL CRUD web application for managing hero records, built for
 Professor Xavier's team management scenario.
