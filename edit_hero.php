@@ -3,10 +3,23 @@ require_once 'config/db.php';
 require_once 'includes/auth.php';
 requireLogin();
 
+//if id is set, int = id, else post id 
+$id = isset($_GET['id']) ? (int) $_GET['id'] : (int) ($_POST['id'] ?? 0);
 
+$stmt = $pdo->prepare("SELECT * FROM heroes WHERE id = :id");
+$stmt->execute(['id' => $id]);
+$hero = $stmt->fetch();
 
+//if hero was not found, return to index.php,  main page
+if (!$hero) {
+    header('Location: index.php');
+    exit;
+}
 
-//Post method
+$error = '';
+$values = $hero;
+
+//Updating database
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     //Trimming values to remove whitespace
@@ -14,6 +27,40 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $values[$key] = trim($_POST[$key] ?? $default);
     }
 
+    if ($values['hero_name'] === '' || $values['real_name'] === '' || $values['short_bio'] === '' || $values['long_bio'] === '') {
+        //if anything is empty, return error
+        $error = 'Hero Name, Real Name, Short Biography, and Long Biography are all required.';
+    } else {
+        //if all good, prepare data
+        $update = $pdo->prepare("
+        UPDATE heroes SET
+            hero_name = :hero_name,
+            real_name = :real_name,
+            short_bio = :short_bio,
+            long_bio  = :long_bio,
+            powers    = :powers,
+            team      = :team,
+            publisher = :publisher,
+            gender    = :gender,
+            status    = :status,
+            image_url = :image_url
+        WHERE id = :id
+        ");
+
+        //execute the prepared data
+        $update -> execute([
+            'hero_name' => $values['hero_name'],
+            'real_name' => $values['real_name'],
+            'short_bio' => $values['short_bio'],
+            'long_bio'  => $values['long_bio'],
+            'powers'    => $values['powers'],
+            'team'      => $values['team'],
+            'publisher' => $values['publisher'],
+            'gender'    => $values['gender'],
+            'status'    => $values['status'],
+            'image_url' => $values['image_url'],
+            'id'        => $id,
+        ])
 
         //redirects header to index.php, the main page
         header('Location: index.php');
@@ -23,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 }
 
-$pageTitle = 'Add Hero';
+$pageTitle = 'Edit' . $hero['hero_name'];
 require_once 'includes/header.php'; //redirects user to header (which should be pointing to main page, index.php)
 
 ?>
