@@ -17,6 +17,12 @@ require_once 'includes/header.php';
 <?php if (isset($_GET['deleted'])): ?>
     <div class="alert alert-success">Hero deleted successfully.</div>
 <?php endif; ?>
+<?php if (isset($_GET['added'])): ?>
+    <div class="alert alert-success">Hero added successfully.</div>
+<?php endif; ?>
+<?php if (isset($_GET['updated'])): ?>
+    <div class="alert alert-success">Hero edited successfully.</div>
+<?php endif; ?>
 
 <div class="hero-grid">
     <?php if (empty($heroes)): ?>
