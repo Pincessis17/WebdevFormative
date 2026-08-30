@@ -53,15 +53,13 @@ require_once 'includes/header.php'; //redirects user to header (which should be 
 
 ?>
 
-<div class = "form-page"> 
+<div class="form-page"> 
     <h1> Add a New Hero</h1>
 
-
-    //error message if there is an error
-    <?php if ($error):
-        <div class = "alert alert-error"> echo htmlspecialchars($error); </div>
-
-    endif; ?>
+    <!-- error message if there is an error -->
+    <?php if ($error): ?>
+        <div class = "alert alert-error"> <?php echo htmlspecialchars($error); ?> </div>
+    <?php endif; ?>
 
     <form method = "POST" action="add_hero.php" class="app-form" id = "hero-form" novalidate>
 
