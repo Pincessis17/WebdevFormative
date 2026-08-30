@@ -11,8 +11,6 @@ try {
         "mysql:host={$db_host};dbname={$db_name};charset=utf8mb4",
         $db_user,
         $db_pass
-
-        "mysql:host={$db_host};dbname={$db_name};charset=utf8mb4", $db_user, $db_pass
     );
     // Throw exceptions on errors instead of silently failing
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
