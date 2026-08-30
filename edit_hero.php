@@ -60,10 +60,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'status'    => $values['status'],
             'image_url' => $values['image_url'],
             'id'        => $id,
-        ])
+        ]);
 
         //redirects header to index.php, the main page
-        header('Location: index.php');
+        header('Location: index.php?update=1');
         exit; //exits cleanly
 
     }
@@ -75,18 +75,16 @@ require_once 'includes/header.php'; //redirects user to header (which should be 
 
 ?>
 
-<!doctype html>
 <div class = "form-page"> 
     <h1>Edit Hero:<?php echo htmlspecialchars($hero['hero_name']); ?> </h1>
 
 
     //error message if there is an error
-    <? if ($error):
-        <div className = "alert alert-error"> echo htmlspecialchars($error); <div>
+    <?php if ($error): ?>
+        <div class = "alert alert-error"> <?php echo htmlspecialchars($error); ?> </div>
+    <? endif; ?>
 
-    endif; ?>
-
-    <form method = "POST" action="add_hero.php" class="add-form" id = "hero-form" novalidate>
+    <form method = "POST" action="edit_hero.php" class="add-form" id = "hero-form" novalidate>
 
         <label for = "hero_name"> Hero Name *</label>
         <input type="text" id="hero_name" name="hero_name" required value="<?php echo htmlspecialchars($values['hero_name']); ?>">
@@ -115,13 +113,15 @@ require_once 'includes/header.php'; //redirects user to header (which should be 
 
 
         <label for = "gender"> Gender *</label>
-        <input type="text" id="gender" name="gendegenderr" value="<?php echo htmlspecialchars($values['gender']); ?>">
+        <input type="text" id="gender" name="gender" value="<?php echo htmlspecialchars($values['gender']); ?>">
 
 
         <label for = "status"> Status *</label>
-        <?php foreach (['Active', 'Inactive', 'Deceased', 'Unknown'] as $opt): ?>
-                <option value="<?php echo $opt; ?>" <?php echo $values['status'] === $opt ? 'selected' : ''; ?>><?php echo $opt; ?></option>
-        <?php endforeach; ?>
+        <select id = 'status' name = "status">
+            <?php foreach (['Active', 'Inactive', 'Deceased', 'Unknown'] as $opt): ?>
+                    <option value="<?php echo $opt; ?>" <?php echo $values['status'] === $opt ? 'selected' : ''; ?>><?php echo $opt; ?></option>
+            <?php endforeach; ?>
+        </select>
 
 
         <label for="image_url">Image URL</label>
