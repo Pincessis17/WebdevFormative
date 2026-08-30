@@ -1,6 +1,7 @@
-<? 
+<?php
 require_once 'config/db.php';
 require_once 'includes/auth.php';
+requirelogin();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id = (int) ($_POST['id'] ?? 0);
@@ -12,7 +13,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt -> execute(['id' => $id]);
     }
 
+    //updating header
+    header('Location: index.php?deleted=1');
+    exit; //exiting clealy
 }
 
-header('Location: index.php?deleted=1');
-exit;
+ // no closing tag as the file only has php

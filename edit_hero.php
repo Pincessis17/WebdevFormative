@@ -82,7 +82,7 @@ require_once 'includes/header.php'; //redirects user to header (which should be 
     //error message if there is an error
     <?php if ($error): ?>
         <div class = "alert alert-error"> <?php echo htmlspecialchars($error); ?> </div>
-    <? endif; ?>
+    <?php endif; ?>
 
     <form method = "POST" action="edit_hero.php" class="add-form" id = "hero-form" novalidate>
 
